@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CreateTaskRequest;
+use App\Http\Requests\UpdateTaskRequest;
 use Illuminate\Http\Request;
 use App\Task;
 
@@ -27,12 +29,8 @@ class TaskController extends Controller
         //
     }
 
-    public function store(Request $request)
+    public function store(CreateTaskRequest $request)
     {
-        $this->validate($request, [
-            'name' => 'required|max:255'
-        ]);
-
         $task = $request->user()->tasks()->create([
             'name' => $request->name
         ]);
@@ -54,7 +52,7 @@ class TaskController extends Controller
         ]);
     }
 
-    public function update(Request $request, $id)
+    public function update(UpdateTaskRequest $request, $id)
     {
         $input = $request->all();
         $task = Task::findOrFail($id);
