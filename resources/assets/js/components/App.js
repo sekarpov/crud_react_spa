@@ -40,6 +40,12 @@ class App extends Component {
                 <div className="media-body">
                     <div>
                         {task.name}
+                        <button
+                            onClick={() => this.handleDelete(task.id)}
+                            className="btn btn-sm btn-warning float-right"
+                        >
+                            Delete
+                        </button>
                     </div>
                     <hr />
                 </div>
@@ -57,6 +63,15 @@ class App extends Component {
 
     componentWillMount() {
         this.getTasks();
+    }
+
+    handleDelete(id) {
+        // remove from local state
+        const isNotId = task => task.id !== id;
+        const updatedTasks = this.state.tasks.filter(isNotId);
+        this.setState({ tasks: updatedTasks });
+        // make delete request to the backend
+        axios.delete(`/tasks/${id}`);
     }
 
     render() {
