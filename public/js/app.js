@@ -65578,6 +65578,22 @@ var App = function (_Component) {
             });
         }
     }, {
+        key: 'getTasks',
+        value: function getTasks() {
+            var _this3 = this;
+
+            axios.get("/tasks").then(function (response) {
+                return _this3.setState({
+                    tasks: [].concat(_toConsumableArray(response.data.tasks))
+                });
+            });
+        }
+    }, {
+        key: 'componentWillMount',
+        value: function componentWillMount() {
+            this.getTasks();
+        }
+    }, {
         key: 'render',
         value: function render() {
             return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
