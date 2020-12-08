@@ -33,7 +33,7 @@ class TaskController extends Controller
             'name' => 'required|max:255'
         ]);
 
-        $task = $request->user()->task()->create([
+        $task = $request->user()->tasks()->create([
             'name' => $request->name
         ]);
 
